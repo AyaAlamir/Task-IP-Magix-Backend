@@ -5,15 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Interfaces\Repository\Crud\" />
-    <Folder Include="Interfaces\Repository\Custom\" />
-    <Folder Include="Interfaces\Repository\Common\" />
-    <Folder Include="Repositories\" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.10" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="3.1.10" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.10" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="3.1.10" />
+    <ProjectReference Include="..\Shared\Shared.csproj" />
   </ItemGroup>
 
 </Project>
