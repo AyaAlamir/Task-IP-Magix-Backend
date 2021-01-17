@@ -24,12 +24,12 @@ namespace Task_IP_Magix
 {
     public class Startup
     {
+        public IConfiguration Configuration { get; }
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -52,14 +52,14 @@ namespace Task_IP_Magix
                 {
                     option.SaveToken = true;
                     option.RequireHttpsMetadata = false;
-                    //option.TokenValidationParameters = new TokenValidationParameters
-                    //{
-                    //    ValidateIssuer = true,
-                    //    ValidateAudience = false,
-                    //    ValidIssuer = Configuration["JWT: ValidIssuer"],
-                    //    ValidAudience = Configuration["JWT: ValidAudience"],
-                    //    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWT: IssuerSigningKey"]))
-                    //};
+                    option.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidateAudience = false,
+                        ValidIssuer = Configuration["JWT:Issuer"],
+                        ValidAudience = Configuration["JWT:Audeince"],
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWT:Secret"]))
+                    };
                 });
 
             services.AddSwaggerGen(options =>

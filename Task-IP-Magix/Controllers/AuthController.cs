@@ -26,14 +26,31 @@ namespace Task_IP_Magix.Controllers
         /// Register new user
         /// </summary>
         /// <param name="registerDto"></param>
-        /// <returns>true if added successfully , false otherwize</returns>
+        /// <returns>true if added successfully , errors otherwize</returns>
         [HttpPost]
-        [ProducesResponseType(typeof(bool), (int)HttpStatusCode.BadRequest)]
-        [ProducesResponseType(typeof(bool), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(string), (int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType(typeof(string), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<string>> Register(RegisterDto registerDto)
         {
             string result = await _authService.Register(registerDto);
             return Ok(result);
+        }
+
+
+        /// <summary>
+        /// login user 
+        /// </summary>
+        /// <param name="loginDto"></param>
+        /// <returns>token if logged successfully , errors otherwize</returns>
+        [HttpPost]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType(typeof(string), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<string>> Login(LoginDto loginDto)
+        {
+            string result = await _authService.Login(loginDto);
+            if (result != null)
+                return Ok(result);
+            return Unauthorized();
         }
 
     }
