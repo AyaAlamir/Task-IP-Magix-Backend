@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Infrastructure.Interfaces.Repository.Common;
+using Infrastructure.Model.Auth;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using ServiceLayer.DTOs;
@@ -15,51 +17,35 @@ namespace ServiceLayer.Services
 {
     public class AuthService : IAuthService
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        private IConfiguration _configration;
-        public AuthService(UserManager<IdentityUser> userManager, IConfiguration configration)
+        private readonly IUnitOfWork _unitOfWork;
+
+        public AuthService(IUnitOfWork unitOfWork)
         {
-            _userManager = userManager;
-            _configration = configration;
+            _unitOfWork = unitOfWork;
         }
+
 
         public async Task<string> Login(LoginDto loginDto)
         {
-           
-            var user = await _userManager.FindByNameAsync(loginDto.UserName);
-            if (user != null && await _userManager.CheckPasswordAsync(user, loginDto.Password))
+            LoginModel loginModel = new LoginModel
             {
-                var userRoles = await _userManager.GetRolesAsync(user);
-                List<Claim> userClaims = new List<Claim>
-                {
-                    new Claim(ClaimTypes.Name, user.UserName),
-                    new Claim(ClaimTypes.Email , user.Email)
-                };
-                var authKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configration["JWT:Secret"]));
-                var token = new JwtSecurityToken(
-                    issuer : _configration["JWT:Issuer"],
-                    audience: _configration["JWT:Audeince"],
-                    expires: DateTime.Now.AddDays(7),
-                    claims: userClaims,
-                    signingCredentials: new SigningCredentials(authKey, SecurityAlgorithms.HmacSha256)
-                    );
-                return new JwtSecurityTokenHandler().WriteToken(token);
-            }
-            return null;
+                UserName = loginDto.UserName,
+                Password = loginDto.Password
+            };
+            string result = await _unitOfWork.Auth.Login(loginModel);         
+            return result;
         }
 
         public async Task<string> Register(RegisterDto registerDto)
         {
-            var userExist = _userManager.FindByNameAsync(registerDto.UserName);
-            IdentityUser user = new IdentityUser
+            RegisterModel registerModel = new RegisterModel
             {
                 UserName = registerDto.UserName,
+                Password = registerDto.Password,
                 Email = registerDto.Email
             };
-            var result = await _userManager.CreateAsync(user, registerDto.Password);
-            if (result.Succeeded)
-                return result.Succeeded.ToString();
-            return result.Errors.FirstOrDefault().Description.ToString();
+            string result = await _unitOfWork.Auth.Register(registerModel);
+            return result;
 
         }
     }

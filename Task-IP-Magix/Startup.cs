@@ -17,6 +17,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using ServiceLayer.Interfaces;
 using ServiceLayer.Services;
 
@@ -69,6 +70,13 @@ namespace Task_IP_Magix
                     Title = Configuration["SwaggerSettings:Title"],
                     Version = Configuration["SwaggerSettings:Version"],
                     Description = Configuration["SwaggerSettings:Description"]
+                });
+                options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    Description = "Standard Authorization header using the Bearer scheme. Example: \"bearer {token}\"",
+                    In = ParameterLocation.Header,
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.ApiKey
                 });
             });
             services.AddTransient<IStudentService, StudentService>();

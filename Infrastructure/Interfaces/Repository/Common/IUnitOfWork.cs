@@ -1,4 +1,5 @@
-﻿using Infrastructure.Model;
+﻿using Infrastructure.Interfaces.Repository.Custom;
+using Infrastructure.Model;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -11,5 +12,6 @@ namespace Infrastructure.Interfaces.Repository.Common
         Task<int> Commit();
         IRepository<Student> Student { get; }
         IRepository<ClassRoom> ClassRoom { get; }
+        IAuthRepository Auth { get; }
     }
 }
