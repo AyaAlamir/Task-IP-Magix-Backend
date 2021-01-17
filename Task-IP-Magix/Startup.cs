@@ -52,14 +52,14 @@ namespace Task_IP_Magix
                 {
                     option.SaveToken = true;
                     option.RequireHttpsMetadata = false;
-                    option.TokenValidationParameters = new TokenValidationParameters
-                    {
-                        ValidateIssuer = true,
-                        ValidateAudience = false,
-                        ValidIssuer = Configuration["JWT: ValidIssuer"],
-                        ValidAudience = Configuration["JWT: ValidAudience"],
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWT: IssuerSigningKey"]))
-                    };
+                    //option.TokenValidationParameters = new TokenValidationParameters
+                    //{
+                    //    ValidateIssuer = true,
+                    //    ValidateAudience = false,
+                    //    ValidIssuer = Configuration["JWT: ValidIssuer"],
+                    //    ValidAudience = Configuration["JWT: ValidAudience"],
+                    //    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWT: IssuerSigningKey"]))
+                    //};
                 });
 
             services.AddSwaggerGen(options =>
@@ -73,6 +73,7 @@ namespace Task_IP_Magix
             });
             services.AddTransient<IStudentService, StudentService>();
             services.AddTransient<IClassRoomService, ClassRoomService>();
+            services.AddTransient<IAuthService, AuthService>();
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
             {
@@ -95,7 +96,7 @@ namespace Task_IP_Magix
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
             app.UseCors("MyPolicy");
             app.UseEndpoints(endpoints =>

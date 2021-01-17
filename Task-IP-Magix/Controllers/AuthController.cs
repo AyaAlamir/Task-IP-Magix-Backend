@@ -30,13 +30,10 @@ namespace Task_IP_Magix.Controllers
         [HttpPost]
         [ProducesResponseType(typeof(bool), (int)HttpStatusCode.BadRequest)]
         [ProducesResponseType(typeof(bool), (int)HttpStatusCode.OK)]
-        public async Task<ActionResult<bool>> Register(RegisterDto registerDto)
+        public async Task<ActionResult<string>> Register(RegisterDto registerDto)
         {
-            bool added = await _authService.Register(registerDto);
-            if (added)
-                return Ok(added);
-            else
-                return BadRequest(added);
+            string result = await _authService.Register(registerDto);
+            return Ok(result);
         }
 
     }

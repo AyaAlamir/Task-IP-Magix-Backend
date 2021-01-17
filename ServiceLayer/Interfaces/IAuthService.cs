@@ -8,6 +8,6 @@ namespace ServiceLayer.Interfaces
 {
     public interface IAuthService
     {
-        Task<bool> Register(RegisterDto registerDto);
+        Task<string> Register(RegisterDto registerDto);
     }
 }
