@@ -9,7 +9,6 @@ namespace Infrastructure.Interfaces.Repository.Crud
 {
     public interface IReadRepository<T>
     {
-        Task<List<T>> GetPageAsync<TKey>(int skipCount, int takeCount, Expression<Func<T, bool>> filter, Expression<Func<T, TKey>> sortingExpression, SortDirectionEnum sortDir = SortDirectionEnum.Ascending, string includeProperties = "");
         Task<List<T>> GetAllAsync();
         Task<T> FirstOrDefaultAsync(Expression<Func<T, bool>> filter);
         Task<T> FirstOrDefaultAsync(Expression<Func<T, bool>> filter, string includeProperties = "");

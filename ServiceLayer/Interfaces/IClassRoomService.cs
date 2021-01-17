@@ -12,6 +12,6 @@ namespace ServiceLayer.Interfaces
         Task<ClassRoomDto> GetClassRoomById(ClassRoomIDentityDto ClassRoomIDentityDto);
         Task<bool> UpdateClassRoom(AddEditClassRoomInputDto addEditClassRoomInputDto);
         Task<bool> DeleteClassRoom(ClassRoomIDentityDto ClassRoomIDentityDto);
-        Task<PageList<ClassRoomDto>> GetAll(ClassRoomSearchDto ClassRoomSearchDto);
+        Task<List<ClassRoomDto>> GetAll();
     }
 }

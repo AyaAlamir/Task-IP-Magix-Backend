@@ -20,43 +20,6 @@ namespace Infrastructure.Repositories
             AppDbContext = appDbContext;
         }
 
-        #region Get Page
-        public async Task<List<T>> GetPageAsync<TKey>(int skipCount, int takeCount, Expression<Func<T, bool>> filter, Expression<Func<T, TKey>> sortingExpression, SortDirectionEnum sortDir = SortDirectionEnum.Ascending, string includeProperties = "")
-        {
-            IQueryable<T> query = AppDbContext.Set<T>();
-            skipCount -= 1;
-            skipCount *= takeCount;
-
-            if (filter != null)
-            {
-                query = query.Where(filter);
-            }
-
-            query = includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
-                .Aggregate(query, (current, includeProperty) => current.Include(includeProperty));
-
-            switch (sortDir)
-            {
-                case SortDirectionEnum.Ascending:
-                    if (skipCount == 0)
-                        query = query.OrderBy<T, TKey>(sortingExpression).Take(takeCount);
-                    else
-                        query = query.OrderBy<T, TKey>(sortingExpression).Skip(skipCount).Take(takeCount);
-                    break;
-                case SortDirectionEnum.Descending:
-                    if (skipCount == 0)
-                        query = query.OrderByDescending<T, TKey>(sortingExpression).Take(takeCount);
-                    else
-                        query = query.OrderByDescending<T, TKey>(sortingExpression).Skip(skipCount).Take(takeCount);
-                    break;
-                default:
-                    break;
-            }
-            return await query.AsNoTracking().ToListAsync();
-
-        }
-        #endregion
-
         #region GetAll
         public async Task<List<T>> GetAllAsync()
         {

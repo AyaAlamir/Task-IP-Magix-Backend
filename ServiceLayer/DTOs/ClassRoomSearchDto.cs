@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ServiceLayer.DTOs
 {
-    public class ClassRoomSearchDto : PagingModel
+    public class ClassRoomSearchDto 
     {
         public string Name { get; set; }
 

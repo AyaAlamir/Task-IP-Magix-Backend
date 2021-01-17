@@ -12,6 +12,6 @@ namespace ServiceLayer.Interfaces
         Task<StudentDto> GetStudentById(StudentIDentityDto StudentIDentityDto);
         Task<bool> UpdateStudent(AddEditStudentInputDto addEditStudentInputDto);
         Task<bool> DeleteStudent(StudentIDentityDto StudentIDentityDto);
-        Task<PageList<StudentDto>> GetAll(StudentSearchDto StudentSearchDto);
+        Task<List<StudentDto>> GetAll();
     }
 }

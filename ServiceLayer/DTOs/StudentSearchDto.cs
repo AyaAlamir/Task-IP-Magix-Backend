@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ServiceLayer.DTOs
 {
-    public class StudentSearchDto : PagingModel
+    public class StudentSearchDto 
     {
     }
 }
