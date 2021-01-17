@@ -5,11 +5,11 @@ VisualStudioVersion = 16.0.29911.84
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Task-IP-Magix", "Task-IP-Magix\Task-IP-Magix.csproj", "{F1A606B0-1E0C-4CCB-B641-66D10D307F08}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{E4BFF4D4-43E3-4D6F-A0E8-3B22882D1DCA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{E4BFF4D4-43E3-4D6F-A0E8-3B22882D1DCA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared.csproj", "{F003BCD3-D79F-423F-BAD7-53B509E3681A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared", "Shared\Shared.csproj", "{F003BCD3-D79F-423F-BAD7-53B509E3681A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceLayer", "ServiceLayer\ServiceLayer.csproj", "{2BEA4222-9B90-4C4B-B2AA-E2D85E86053E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceLayer", "ServiceLayer\ServiceLayer.csproj", "{2BEA4222-9B90-4C4B-B2AA-E2D85E86053E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
