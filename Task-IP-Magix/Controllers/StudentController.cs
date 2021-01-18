@@ -92,7 +92,7 @@ namespace Task_IP_Magix.Controllers
         /// Get all students data
         /// </summary>
         /// <returns> returns data if exists</returns>
-        [HttpPost]
+        [HttpGet]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType(typeof(List<StudentDto>), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<List<StudentDto>>> GetAll()

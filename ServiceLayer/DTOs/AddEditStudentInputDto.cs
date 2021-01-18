@@ -8,6 +8,7 @@ namespace ServiceLayer.DTOs
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public int ClassRoomID { get; set; }
         public DateTime BirthDate { get; set; }
     }
 }

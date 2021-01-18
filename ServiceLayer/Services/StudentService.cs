@@ -29,7 +29,8 @@ namespace ServiceLayer.Services
                 {
                     Name = addEditStudentInputDto.Name,
                     BirthDate = addEditStudentInputDto.BirthDate,
-                    CreationDate = DateTime.Now
+                    ClassRoomID = addEditStudentInputDto.ClassRoomID,
+                    CreationDate = DateTime.Now,
                 };
                 _unitOfWork.Student.CreateAsyn(student);
                 added = await _unitOfWork.Commit() > default(int);
@@ -97,6 +98,7 @@ namespace ServiceLayer.Services
                     student.Name = addEditStudentInputDto.Name;
                     student.BirthDate = addEditStudentInputDto.BirthDate;
                     student.LastUpdated = DateTime.Now;
+                    student.ClassRoomID = addEditStudentInputDto.ClassRoomID;
                     _unitOfWork.Student.Update(student);
                     updated = await _unitOfWork.Commit() > default(int);
                 }

@@ -92,7 +92,7 @@ namespace Task_IP_Magix.Controllers
         /// return all classrooms
         /// </summary>
         /// <returns>return the data if exists</returns>
-        [HttpPost]
+        [HttpGet]
         [ProducesResponseType(typeof(bool), (int)HttpStatusCode.BadRequest)]
         [ProducesResponseType(typeof(List<ClassRoomDto>), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<List<ClassRoomDto>>> GetAll()
